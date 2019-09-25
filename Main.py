@@ -12,11 +12,14 @@ np.set_printoptions(threshold=np.inf)
 print(erg)
 nullen = 0
 einsen = 0
-for a in erg[1]:
-    if a < 1.0:
-        nullen += 1
-    else:
-        einsen += 1
-print(nullen)
-print(einsen)
+if len(erg) <= 0:
+    print("erst Bilder anlegen")
+else:
+    for a in erg[1]:
+        if a < 1.0:
+            nullen += 1
+        else:
+            einsen += 1
+    print(nullen)
+    print(einsen)
 

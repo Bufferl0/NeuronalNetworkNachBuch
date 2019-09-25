@@ -10,6 +10,10 @@ class pngWandler:
     def openPictures(self):
         """gibt ein array aus paaren zurück, alle ungeraden zahlen sind die Lösung zur darauffolgenden Matrix"""
         erg = []  # ergebnis array aus tupeln initialisiert
+        try:
+            files = os.listdir(self.path)
+        except FileNotFoundError:
+            os.makedirs(self.path)
         "iteriere über alle files im gegebenen Ordner"
         for filename in os.listdir(self.path):  # listet die name aller gefundenen dateien im gefundenen ordner auf
             "lies matrix ein"
