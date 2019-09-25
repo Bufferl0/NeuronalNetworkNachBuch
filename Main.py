@@ -5,9 +5,10 @@ import numpy as np
 """=======================================================Attribute=================================================="""
 path = "C:/pythonImg/"
 """=======================================================CODE======================================================="""
-#eingabe = Eingabe(path)
+
 erg = pngWandler(path).openPictures()
 np.set_printoptions(threshold=np.inf) # wird für Ausgabe der Matrizen benötigt
 eing = Eingabe(path)
+print(erg)
 
 

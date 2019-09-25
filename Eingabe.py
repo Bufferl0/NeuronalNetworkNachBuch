@@ -6,6 +6,7 @@ from PIL import Image, ImageDraw
 # --Created by Janek Zitzmann, 18.09.2019
 class Eingabe:
     def __init__(self,savepath):
+        self.size = (28,28)
         self.savepath = savepath
         file = open("C:/pythonImg/currentImgCount.txt", "w+")
         self.current_save_number = file.read()
@@ -43,7 +44,8 @@ class Eingabe:
 
         filename = self.savepath + correct_answer + self.current_save_number + ".png"
         self.update_save_number()
-        self.image1.save(filename)
+        imageResized = self.image1.resize(self.size, Image.ANTIALIAS)
+        imageResized.save(filename)
 
     def clear(self):
         self.cv.delete("all")
