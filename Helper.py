@@ -4,6 +4,7 @@ import os
 
 # --Created by Janek Zitzmann, 17.09.2019
 class pngWandler:
+    """Öfnet alle Bilder im angegeben Pfad und wandelt sie in ein 1D Array um"""
     def __init__(self, path):
         self.path = path
 
