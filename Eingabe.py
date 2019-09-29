@@ -8,7 +8,7 @@ class Eingabe:
     def __init__(self,savepath):
         self.size = (28,28)
         self.savepath = savepath
-        file = open("C:/pythonImg/currentImgCount.txt", "w+")
+        file = open(self.savepath + "currentImgCount.txt", "w+")
         self.current_save_number = file.read()
         "falls das file leer ist wird 0 als filename angesetzt und in das file geschrieben"
         if not self.current_save_number: # empty strings are considered false in boolean

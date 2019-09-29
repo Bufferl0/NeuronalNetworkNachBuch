@@ -17,16 +17,19 @@ class pngWandler:
             os.makedirs(self.path)
         "iteriere über alle files im gegebenen Ordner"
         for filename in os.listdir(self.path):  # listet die name aller gefundenen dateien im gefundenen ordner auf
-            "lies matrix ein"
-            picturematrix = matplotlib.pyplot.imread(self.path + filename)
-            "Speichere Ergebnis ab"
-            richtigeantwort = filename[0]  # per konvention ist das erste Zeichen des filenames das richtige Ergebnis
-            "matrix transformieren"
-            picturematrix = self.eindimensionalegrauwertmatrix(picturematrix)
-            "Paar im Array abspeichern"
-            tupel = (richtigeantwort, picturematrix)
-            erg += tupel
-            return erg
+            if filename != self.path + "currentImgCount.txt":
+                "lies matrix ein"
+                picturematrix = matplotlib.pyplot.imread(self.path + filename)
+                "Speichere Ergebnis ab"
+                richtigeantwort = filename[0]  # per konvention ist das erste Zeichen des filenames das richtige Ergebnis
+                "matrix transformieren"
+                picturematrix = self.eindimensionalegrauwertmatrix(picturematrix)
+                "Paar im Array abspeichern"
+                richtigeantwortAlsMatrix = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                richtigeantwortAlsMatrix[int(richtigeantwort)] = 0.99
+                tupel = (richtigeantwortAlsMatrix, picturematrix)
+                erg += tupel
+        return erg
 
     @staticmethod
     def eindimensionalegrauwertmatrix(matrix):
