@@ -5,21 +5,26 @@ from PIL import Image, ImageDraw
 
 # --Created by Janek Zitzmann, 18.09.2019
 class Eingabe:
-    def __init__(self,savepath):
-        self.size = (28,28)
+    #TODO Attribute auflisten
+    """========================ATTRIBUTE========================="""
+    #size:
+    #root:
+
+    def __init__(self, savepath):
+        self.size = (28, 28)
         self.savepath = savepath
-        file = open(self.savepath + "currentImgCount.txt", "w+")
+        file = open(self.savepath + "currentImgCount.txt", "w+") #TODO evtl. Fehler beim öffnen -> FIle wird neu angelegt
         self.current_save_number = file.read()
         "falls das file leer ist wird 0 als filename angesetzt und in das file geschrieben"
         if not self.current_save_number: # empty strings are considered false in boolean
             self.current_save_number = "0"
             file.write(str(self.current_save_number))
-
         file.close()
+
         self.root = Tk()
         self.cv = Canvas(self.root, width=200, height=200, bg='white')
         # --- PIL
-        self.image1 = PIL.Image.new('RGB', (200, 200), 'white')
+        self.image1 = PIL.Image.new('1', (200, 200), 0) #1 = mode, 1-bit Schwarz-Weiß
         self.draw = ImageDraw.Draw(self.image1)
         # ----
         self.cv.bind('<B1-Motion>', self.paint)
@@ -49,7 +54,7 @@ class Eingabe:
 
     def clear(self):
         self.cv.delete("all")
-        self.image1 = PIL.Image.new('RGB', (200, 200), 'white')
+        self.image1 = PIL.Image.new('1', (200, 200), 'white')
         self.draw = ImageDraw.Draw(self.image1)
         self.text_box.delete("1.0", END)
 
@@ -69,11 +74,12 @@ class Eingabe:
             return False
 
     def update_save_number(self):
+        #TODO Nummer wird nicht aktualisiert
         """Updated die Save nummer und schreibt sie direkt ins Sicherungsfile hinein"""
         helper = int(self.current_save_number)
         helper += 1
         "nummer wieder in String wandeln und abspeichern"
         self.current_save_number = str(helper)
-        file = open(self.savepath + "currentImgCount.txt", "w")
+        file = open(self.savepath + "currentImgCount.txt", "w+")
         file.write(self.current_save_number)
         file.close()
