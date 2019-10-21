@@ -24,6 +24,7 @@ class pngWandler:
 
                 picturematrix = matplotlib.pyplot.imread(self.path + filename)
                 picturematrix = picturematrix.flatten()
+                scaled_matrix = (np.asfarray(picturematrix[0:]) - 1) * -1 + 0.01
                 "Speichere Ergebnis ab"
                 richtigeantwort = filename[0]  # per konvention ist das erste Zeichen des filenames das richtige Ergebnis
                 "matrix transformieren"
@@ -31,7 +32,8 @@ class pngWandler:
                 "Paar im Array abspeichern"
                 richtigeantwortAlsMatrix = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                 richtigeantwortAlsMatrix[int(richtigeantwort)] = 0.99
-                tupel = (richtigeantwortAlsMatrix, picturematrix)
+                #tupel = (richtigeantwortAlsMatrix, picturematrix)
+                tupel = (richtigeantwortAlsMatrix, scaled_matrix)
                 erg += tupel
         return erg
 

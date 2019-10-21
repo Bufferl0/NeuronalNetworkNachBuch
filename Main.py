@@ -7,12 +7,14 @@ from Network import network
 path = "C:/pythonImg/"
 inputnodes = 784
 """=======================================================CODE======================================================="""
+def transformAnswer(antwortMatrix):
+    index = np.where(antwortMatrix == np.amax(antwortMatrix))
+    return index
 
-erg = pngWandler(path).openPictures()
 np.set_printoptions(threshold=np.inf) # wird für Ausgabe der Matrizen benötigt
-#eingabe = Eingabe(path)
-
-print(len(erg))
+eingabe = Eingabe(path)
+erg = pngWandler(path).openPictures()
+print(erg[1])
 images = []
 targets = []
 i = 0
@@ -25,8 +27,14 @@ while j < 1:
         i += 2
     j += 1
 
-print(nw.query(erg[3]))
-print(nw.query(erg[9]))
+print(transformAnswer(nw.query(erg[3])))
+print(transformAnswer(nw.query(erg[3])))
+print(transformAnswer(nw.query(erg[7])))
+print(transformAnswer(nw.query(erg[7])))
+print(transformAnswer(nw.query(erg[13])))
+
+
+
 
 
 
