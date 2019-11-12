@@ -2,6 +2,16 @@ import numpy as np
 import scipy.special
 
 class network:
+    """=============================================ATTRIBUTE===================================="""
+    """
+    inodes -> inputnodes, first layer
+    hnodes -> hiddennodes, middle layer
+    onodes -> outputnodes, last layer
+    wih -> weighted input nodes, matrix that gets multiplied with the actual input
+    who -> weighted output nodes, matrix that gets multiplied with output of hidden nodes
+    lr -> learning rate, determines the impact of a error
+    activation_function -> scipy.special.expit(x)
+    """
     def __init__(self,inputnodes,hiddennodes,outputnodes,learningrate):
         self.inodes = inputnodes
         self.hnodes = hiddennodes
@@ -54,11 +64,4 @@ class network:
         final_inputs = np.dot(self.who, hidden_outputs)
         # calculate the signals emerging from final output layer
         final_outputs = self.activation_function(final_inputs)
-        i = 0
-        j = 0
-        for arr in final_outputs:
-            for number in arr:
-                number = round(number, 2)
-                final_outputs[i][j] = number
-            i += 1
         return final_outputs

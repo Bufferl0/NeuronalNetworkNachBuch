@@ -7,6 +7,19 @@ from PIL import Image, ImageDraw
 class Eingabe:
     #TODO Attribute auflisten
     """========================ATTRIBUTE========================="""
+    """
+    size -> size of the saved image
+    savepath -> path where images get saved too 
+    current_save_number -> current number of saved pictures, makes sure savepaths dont get in each others way
+    root -> root class of Tkinter functions as base window similar to java application class
+    cv -> canvas
+    image1 -> current image that gets drawn by user
+    draw -> screen 
+    btn_save -> save button
+    btn_clear -> clear button
+    text_box -> input field for correct answer
+    
+    """
     #size:
     #root:
 
