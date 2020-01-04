@@ -85,7 +85,15 @@ def getIndexOfMaxValue (array):
 def testNetwork(network, pathOfTestDatabase):
     wandler = pngWandler(pathOfTestDatabase)
     pictures = wandler.openPictures()
+    right = 0
+    wrong = 0
     index = 1
     while index < len(pictures):
-
+        result = network.query(pictures[index])
+        formattedresult = getIndexOfMaxValue(result)
+        if formattedresult == getIndexOfMaxValue(pictures[index-1]):
+            right += 1
+        else:
+            wrong += 1
         index += 2
+    return right, wrong

@@ -5,7 +5,8 @@ import numpy as np
 from Network import network
 # -- created by Janek Zitzmann, 17.09.2019
 """=======================================================Attribute=================================================="""
-path = "C:/pythonImg/"
+path = "C:/pythonImgTrain/"
+path2 = "C:/pythonImg/"
 inputnodes = 784
 """=======================================================CODE======================================================="""
 def transformAnswer(antwortMatrix):
@@ -19,17 +20,17 @@ images = []
 targets = []
 i = 0
 j = 0
-nw = network(inputnodes, 300, 10, 0.6)
-while j < 1:
+nw = network(inputnodes, 300, 10, 0.3)
+while j < 3:
     for obj in erg:
         if i+1 < len(erg):
             nw.train(erg[i+1], erg[i])
         i += 2
     j += 1
 eingabe = Eingabe(path, nw)
-print(transformAnswer(nw.query(erg[3])))
-print(transformAnswer(nw.query(erg[5])))
-print(transformAnswer(nw.query(erg[13])))
+right, wrong = Helper.testNetwork(nw, path)
+print(right)
+print(wrong)
 
 
 
