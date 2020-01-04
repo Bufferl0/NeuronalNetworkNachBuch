@@ -3,6 +3,7 @@ from uu import Error
 import matplotlib.pyplot
 import numpy as np
 import os
+import shutil
 
 # --Created by Janek Zitzmann, 17.09.2019
 class pngWandler:
@@ -57,3 +58,34 @@ class pngWandler:
         file.write("\n")
         '''
         return ergebnis
+
+def deleteFilesInFolder(path):
+    folder = path
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+def getIndexOfMaxValue (array):
+    maxIndex = 0
+    currentIndex = 1
+    maxValue = array[0]
+    while currentIndex < len(array):
+        if array[currentIndex] > maxValue:
+            maxValue = array[currentIndex]
+            maxIndex = currentIndex
+        currentIndex += 1
+    return maxIndex
+
+def testNetwork(network, pathOfTestDatabase):
+    wandler = pngWandler(pathOfTestDatabase)
+    pictures = wandler.openPictures()
+    index = 1
+    while index < len(pictures):
+
+        index += 2
