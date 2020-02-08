@@ -31,6 +31,7 @@ eingabe = Eingabe(path, nw)
 right, wrong = Helper.testNetwork(nw, path)
 print(right)
 print(wrong)
+Helper.readFromMnist()
 
 
 
