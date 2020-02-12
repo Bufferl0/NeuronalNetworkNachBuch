@@ -4,6 +4,8 @@ from Eingabe import Eingabe
 import numpy as np
 from Network import network
 # -- created by Janek Zitzmann, 17.09.2019
+# -- comments added by Pascal Kattler, 12.02.2020
+
 """=======================================================Attribute=================================================="""
 path = "C:/pythonImgTrain/"
 path2 = "C:/pythonImg/"

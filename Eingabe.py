@@ -1,5 +1,4 @@
 from tkinter import *
-# by Canvas I can't save image, so i use PIL
 import PIL
 from PIL import Image, ImageDraw
 import Helper
@@ -12,20 +11,21 @@ class Eingabe:
     #TODO Attribute auflisten
     """========================ATTRIBUTE========================="""
     """
-    size -> size of the saved image
-    savepath -> path where images get saved too 
-    current_save_number -> current number of saved pictures, makes sure savepaths dont get in each others way
-    root -> root class of Tkinter functions as base window similar to java application class
-    cv -> canvas
-    image1 -> current image that gets drawn by user
-    draw -> screen 
-    btn_save -> save button
-    btn_clear -> clear button
-    text_box -> input field for correct answer
+    Bildeigenschaften:
+    size: Größe des Bildes
+    savepath: Speicherort, bzw der Weg dorthin 
+    current_save_number: Abgespeicherte Bilder
+    image1: Aktuelles Bild, welcher durch den Benutzer erstellt wird
+    
+    Programmspezifisch:
+    draw: Zeichenmethode 
+   
+   Knöpfe:
+   btn_save: Bild wird gespeichert
+    btn_clear: Zeichenfläche wird gecleared 
+    text_box: Antwortfeld für die einzige richtige Antwort
     
     """
-    #size:
-    #root:
 
     def __init__(self, savepath, neuronal_network):
         self.size = (28, 28)
@@ -42,10 +42,8 @@ class Eingabe:
 
         self.root = Tk()
         self.cv = Canvas(self.root, width=200, height=200, bg='white')
-        # --- PIL
         self.image1 = PIL.Image.new('L', (200, 200), "white") #1 = mode, 1-bit Schwarz-Weiß
         self.draw = ImageDraw.Draw(self.image1)
-        # ----
         self.cv.bind('<B1-Motion>', self.paint)
         self.cv.pack(expand=YES, fill=BOTH)
         self.text_box = Text(self.root, height=2, width=4)
@@ -63,7 +61,8 @@ class Eingabe:
         self.root.mainloop()
 
     def save(self, path = "", saveWithAnswer = True):
-        # 1.0 = einlesen des inputs von zeile 1 character 0, end-1c = lies bis zum ende und lösche den letzten character, END fügt dem input string ein newline an das wir wieder löschen müssen
+        # 1.0 = einlesen des inputs von zeile 1 character 0, end-1c = lies bis zum ende und lösche den letzten character,
+        # END fügt dem input string ein newline an das wir wieder löschen müssen
         correct_answer = self.text_box.get("1.0", "end-1c")
         if len(correct_answer) > 1:
             raise Exception("zu viele Zeichen, bitte nur Zahlen von 1-9")
@@ -91,8 +90,7 @@ class Eingabe:
         self.draw.line((x1, y1, x2, y2), fill='black', width=10)
 
     def queryNetwork(self):
-        #TODO what if network is null
-        path = "C:/temp/" #NEVER USE C: as DIRECTORY TODO NEVER PLS NEVER
+        path = "C:/temp/"
         self.save(path, saveWithAnswer=False)
         wandler = pngWandler(path)
         picture = wandler.openPictures()#TODO path definieren bei dem der Wandler die Bilder öffnen soll am besten mit setPath in der Wandler klasse
@@ -102,7 +100,6 @@ class Eingabe:
         print(formatted_answer)
         if path == "C:/":
             raise Exception("DONT DELETE ALL FOLDERS IN C")
-
 
         Helper.deleteFilesInFolder(path)
 
@@ -116,7 +113,6 @@ class Eingabe:
             return False
 
     def update_save_number(self):
-        #TODO Nummer wird nicht aktualisiert
         """Updated die Save nummer und schreibt sie direkt ins Sicherungsfile hinein"""
         helper = int(self.current_save_number)
         helper += 1
