@@ -7,6 +7,9 @@ from Network import network
 import os,shutil
 
 # --Created by Janek Zitzmann, 18.09.2019
+# -- comments added by Pascal Kattler, 12.02.2020
+# -- comments added by Pascal Kattler, 13.02.2020
+
 class Eingabe:
     #TODO Attribute auflisten
     """========================ATTRIBUTE========================="""
@@ -24,9 +27,9 @@ class Eingabe:
    btn_save: Bild wird gespeichert
     btn_clear: Zeichenfläche wird gecleared 
     text_box: Antwortfeld für die einzige richtige Antwort
-    
     """
 
+    """============================================Konstruktor============================================"""
     def __init__(self, savepath, neuronal_network):
         self.size = (28, 28)
         self.savepath = savepath
@@ -39,7 +42,8 @@ class Eingabe:
         file.close()
         self.network = neuronal_network
 
-
+        """============================================Layout der Eingabe============================================"""
+        
         self.root = Tk()
         self.cv = Canvas(self.root, width=200, height=200, bg='white')
         self.image1 = PIL.Image.new('L', (200, 200), "white") #1 = mode, 1-bit Schwarz-Weiß
@@ -72,24 +76,24 @@ class Eingabe:
             path = self.savepath
         filename = path + correct_answer + self.current_save_number + ".png"
 
-        imageResized = self.image1.resize(self.size, Image.ANTIALIAS)
+        imageResized = self.image1.resize(self.size, Image.ANTIALIAS) #wird benötigt damit das Netz eine smoothere Ausgangsmatrix hat
         imageResized.save(filename)
         self.update_save_number()
 
-    def clear(self):
+    def clear(self): # Cleared das Eingabefeld und legt gleichzeitig ein neues File an damit ein neues Bild gleich abgespeichert werden kann.
         self.cv.delete("all")
         self.image1 = PIL.Image.new('L', (200, 200), "white")
         self.draw = ImageDraw.Draw(self.image1)
         self.text_box.delete("1.0", END)
 
-    def paint(self, event):
+    def paint(self, event): # Paint ist dafür verantwortlich das überhaupt gemalt werden kann. Hier wird der Strich mit den Koordinaten erzeugt
         x1, y1 = (event.x), (event.y)
         x2, y2 = (event.x + 1), (event.y + 1)
         self.cv.create_oval((x1, y1, x2, y2), fill='black', width=10)
         #  --- PIL
         self.draw.line((x1, y1, x2, y2), fill='black', width=10)
 
-    def queryNetwork(self):
+    def queryNetwork(self): #queryNetwrotk verbindet das Bild, die Matrix und die richtige Eingabe mit dem Netzwerk
         path = "C:/temp/"
         self.save(path, saveWithAnswer=False)
         wandler = pngWandler(path)

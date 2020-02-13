@@ -8,6 +8,8 @@ import shutil
 from Network import network
 
 # --Created by Janek Zitzmann, 17.09.2019
+# -- comments added by Pascal Kattler, 12.02.2020
+# -- comments added by Pascal Kattler, 13.02.2020
 class pngWandler:
     """Öfnet alle Bilder im angegeben Pfad und wandelt sie in ein 1D Array um"""
     """===========================ATTRIBUTE===================================="""

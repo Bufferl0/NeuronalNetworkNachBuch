@@ -1,3 +1,4 @@
+# Import
 from Helper import pngWandler
 import Helper
 from Eingabe import Eingabe
@@ -5,12 +6,18 @@ import numpy as np
 from Network import network
 # -- created by Janek Zitzmann, 17.09.2019
 # -- comments added by Pascal Kattler, 12.02.2020
+# -- comments added by Pascal Kattler, 13.02.2020
 
 """=======================================================Attribute=================================================="""
-path = "C:/pythonImgTrain/"
-path2 = "C:/pythonImg/"
+# Es werden zwei Paths benötigt da das Programm aus zwei Quellen lernen kann.
+path = "C:/pythonImgTrain/"  # Datenbankimages
+path2 = "C:/pythonImg/"      # Speicherort der Eingabe des Benutzers
+
+# Zu Beginn müssen die Input Nodes festgelegt werden
 inputnodes = 784
+
 """=======================================================CODE======================================================="""
+
 def transformAnswer(antwortMatrix):
     index = Helper.getIndexOfMaxValue(antwortMatrix)
     return index
